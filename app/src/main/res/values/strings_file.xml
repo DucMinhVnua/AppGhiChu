@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="tv_thumuc">Thư mục</string>
+    <string name="tv_ghichu">Ghi chú</string>
+    <string name="tv_daxoaganday">Đã xóa gần đây</string>
+    <string name="tv_xong">Xong</string>
+</resources>

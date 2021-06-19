@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ThemCV.ThemCongViec"
+    android:background="@color/background">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background_layout">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/frame_back">
+            <ImageView
+                android:id="@+id/imgv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_back"/>
+
+            <TextView
+                android:id="@+id/tv_ten_tieu_de"
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@color/icon"
+                android:textSize="20sp"
+                android:gravity="center_vertical"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_luu_cong_viec"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/tv_xong"
+            android:textSize="20sp"
+            android:textColor="@color/icon"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:layout_marginRight="20sp"/>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:inputType="textMultiLine"
+            android:lines="100"
+            android:gravity="left|top"
+            android:textColorHighlight="@color/icon"
+            android:id="@+id/edt_them_CV"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:layout_marginRight="20sp"
+            android:layout_marginLeft="20sp"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:background="@drawable/border_edt_themcv"
+            android:layout_height="wrap_content"/>
+    </ScrollView>
+</RelativeLayout>

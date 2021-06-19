@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="50sp"
+        android:orientation="horizontal"
+        android:weightSum="9"
+        android:layout_marginTop="30sp"
+        android:transitionName="example_transition">
+
+        <EditText
+            android:id="@+id/image_activity_1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:gravity="center"
+            android:hint="search"
+            android:padding="10sp"
+            android:background="@drawable/border_edt"/>
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:layout_alignBottom="@+id/image_activity_1"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="36dp"
+        android:layout_centerHorizontal="true"
+        android:text="Open Activity 2" />
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/lt"
+        app:lottie_repeatCount="5"
+        app:lottie_repeatMode="reverse"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/anima"/>
+</RelativeLayout>

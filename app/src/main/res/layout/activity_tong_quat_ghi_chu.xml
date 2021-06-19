@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TQGhiChu.TongQuatGhiChu"
+    android:background="@color/background">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/background_layout">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/frame_back">
+            <ImageView
+                android:id="@+id/imgv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_back"/>
+
+            <TextView
+                android:layout_marginLeft="20sp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/tv_thumuc"
+                android:textColor="@color/icon"
+                android:textSize="20sp"
+                android:gravity="center_vertical"/>
+        </FrameLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <TextView
+        android:id="@+id/tv_ghichu"
+        android:layout_below="@+id/tool_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15sp"
+        android:text="@string/tv_ghichu"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="20sp"
+        android:layout_marginLeft="20sp"
+        android:layout_below="@+id/tv_ghichu">
+
+        <EditText
+            android:id="@+id/edt_search"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/color_cursor"
+            android:textColorHighlight="@color/icon"
+            android:paddingTop="10sp"
+            android:paddingBottom="10sp"
+            android:paddingLeft="40sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/boder_bgr_search_ghichu"
+            android:hint= "Tìm kiếm"
+            android:textColorHint="@color/hint">
+        </EditText>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_search"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="10sp"/>
+    </FrameLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tb"
+        android:layout_below="@+id/frame_layout"
+        android:layout_margin="20sp"/>
+
+    <Toolbar
+        android:id="@+id/tb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_layout"
+        android:layout_alignParentBottom="true"
+        tools:targetApi="lollipop">
+
+        <TextView
+            android:id="@+id/tv_dem_ghi_chu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="3 ghi chú"
+            android:textColor="@color/white"
+            android:layout_gravity="center"/>
+
+        <ImageView
+            android:id="@+id/imgv_them_cong_viec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:src="@drawable/ic_edit"
+            android:layout_marginRight="20sp"
+            tools:ignore="VectorDrawableCompat" />
+    </Toolbar>
+</RelativeLayout>
