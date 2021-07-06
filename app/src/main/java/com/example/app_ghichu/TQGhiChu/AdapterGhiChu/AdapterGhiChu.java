@@ -1,6 +1,7 @@
 package com.example.app_ghichu.TQGhiChu.AdapterGhiChu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.example.app_ghichu.TQGhiChu.ObjGhiChu.ObjGhiChu;
 import com.example.app_ghichu.TQGhiChu.Search.ObjFlag;
 import com.example.app_ghichu.TQGhiChu.Search.Search_Item;
 import com.example.app_ghichu.TQGhiChu.TongQuatGhiChu;
+import com.example.app_ghichu.TQGhiChu.UpdateGhiChu.UpdateGhiChu;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,11 +27,13 @@ import java.util.List;
 
 public class AdapterGhiChu extends RecyclerView.Adapter<AdapterGhiChu.GhiChuViewHolder>{
 
+    UpdateGhiChu contextUpdate;
     Search_Item contextSearch;
     TongQuatGhiChu context;
     List<ObjGhiChu> mList;
 
-    public AdapterGhiChu(Search_Item contextSearch, TongQuatGhiChu context, List<ObjGhiChu> mList) {
+    public AdapterGhiChu(UpdateGhiChu contextUpdate, Search_Item contextSearch, TongQuatGhiChu context, List<ObjGhiChu> mList) {
+        this.contextUpdate = contextUpdate;
         this.contextSearch = contextSearch;
         this.context = context;
         this.mList = mList;
@@ -56,7 +60,19 @@ public class AdapterGhiChu extends RecyclerView.Adapter<AdapterGhiChu.GhiChuView
         holder.layoutItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("Sửa" + objGhiChu.getId());
+                if (ObjFlag.getFlag() == 0) {
+                    Intent intent = new Intent(contextSearch, UpdateGhiChu.class);
+                    intent.putExtra("id", objGhiChu.getId());
+                    intent.putExtra("ghichu", objGhiChu.getGhiChu());
+                    intent.putExtra("ngaythang", objGhiChu.getNgayThang());
+                    contextSearch.startActivity(intent);
+                } else {
+                    Intent intent = new Intent(context, UpdateGhiChu.class);
+                    intent.putExtra("id", objGhiChu.getId());
+                    intent.putExtra("ghichu", objGhiChu.getGhiChu());
+                    intent.putExtra("ngaythang", objGhiChu.getNgayThang());
+                    context.startActivity(intent);
+                }
             }
         });
 

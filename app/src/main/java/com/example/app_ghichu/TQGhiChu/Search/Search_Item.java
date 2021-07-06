@@ -17,6 +17,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.app_ghichu.Database.DBGhiChu;
 import com.example.app_ghichu.R;
 import com.example.app_ghichu.TQGhiChu.AdapterGhiChu.AdapterGhiChu;
@@ -38,8 +40,6 @@ public class Search_Item extends AppCompatActivity {
     TextView tvHuy;
     EditText searchCongViec;
 
-    String text;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,10 +47,13 @@ public class Search_Item extends AppCompatActivity {
 
         System.out.println(ObjFlag.getFlag());
 
+        // Animation
+        Animation();
+
         // Khởi tạo UI
         InitUI();
 
-        // Khởi tạo lại database
+        // Khởi tạo database
         DataBaseGhiChu() ;
 
         // Load toàn bộ ghi chú ra màn hình
@@ -73,7 +76,7 @@ public class Search_Item extends AppCompatActivity {
         searchCongViec = findViewById(R.id.edt_search_item);
     }
 
-    // Khởi tạo lại database
+    // Khởi tạo database
     public void DataBaseGhiChu () {
         // Tạo database
         db = new DBGhiChu(this, "GhiChu.sqlite", null, 1);
@@ -85,7 +88,7 @@ public class Search_Item extends AppCompatActivity {
         InitAndAddArrayList ();
 
         // Khởi tạo adapter ghi chú
-        adapterGhiChu = new AdapterGhiChu(this,null, arrayListGhiChu);
+        adapterGhiChu = new AdapterGhiChu(null,this,null, arrayListGhiChu);
 
         // Khởi tạo LinearLayoutManager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -151,9 +154,16 @@ public class Search_Item extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         try {
+                            // Insert ghi chú xóa vào bảng CongViecDaXoa
+                            InsertGhiChuDaXoa (id);
+
+                            // Delete ghi chú
                             db.KhongTraVe("DELETE FROM CongViec WHERE id = '"+ id +"'");
 
+                            // Off dialog
                             dialogInterface.dismiss();
+
+                            // Thông báo
                             Toast.makeText(Search_Item.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
 
                             // cập nhật lại dữ liệu sau khi xóa
@@ -197,7 +207,7 @@ public class Search_Item extends AppCompatActivity {
 
            @Override
            public void afterTextChanged(Editable s) {
-                System.out.println(s);
+               System.out.println(s);
                filter (s.toString());
            }
        });
@@ -215,5 +225,24 @@ public class Search_Item extends AppCompatActivity {
         }
 
         adapterGhiChu.FilterList(filterList);
+    }
+
+    // Insert ghi chú xóa vào bảng CongViecDaXoa
+    public void InsertGhiChuDaXoa(int id) {
+        Cursor cursor = db.TraVe("SELECT * FROM CongViec WHERE id = '"+ id +"'");
+        while (cursor.moveToNext()) {
+            String ghiChu = cursor.getString(1);
+            String gioPhut = cursor.getString(2);
+
+            db.KhongTraVe("INSERT INTO CongViecDaXoa VALUES (null,'"+ ghiChu +"', '"+ gioPhut +"')");
+        }
+    }
+
+    // Animation
+    public void Animation () {
+        YoYo.with(Techniques.Pulse)
+                .duration(500)
+                .repeat(0)
+                .playOn(findViewById(R.id.layout_main));
     }
 }

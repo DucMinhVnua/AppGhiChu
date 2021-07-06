@@ -12,9 +12,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityOptionsCompat;
+import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.app_ghichu.Database.DBGhiChu;
 import com.example.app_ghichu.MainActivity;
 import com.example.app_ghichu.R;
@@ -39,12 +43,15 @@ public class TongQuatGhiChu extends AppCompatActivity {
     ImageView themCongViec;
     DBGhiChu db;
     EditText Search;
-    TextView demGhiChu;
+    TextView demGhiChu, tvThuMuc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tong_quat_ghi_chu);
+
+        // Animation
+        Animation();
 
         System.out.println("Flag: " + ObjFlag.getFlag());
 
@@ -76,15 +83,13 @@ public class TongQuatGhiChu extends AppCompatActivity {
         themCongViec = findViewById(R.id.imgv_them_cong_viec);
         Search = findViewById(R.id.edt_search);
         demGhiChu = findViewById(R.id.tv_dem_ghi_chu);
+        tvThuMuc = findViewById(R.id.tv_thumuc);
     }
 
-    // Tạo database và tạo bảng cho database
+    // Khởi tạo database
     public void DataBaseGhiChu () {
         // Tạo database
         db = new DBGhiChu(this, "GhiChu.sqlite", null, 1);
-
-        // Tạo bảng cho database
-        db.KhongTraVe("CREATE TABLE IF NOT EXISTS CongViec (Id INTEGER PRIMARY KEY AUTOINCREMENT, tenGhiChu VARCHAR(200), gioGhiChu DATE)");
     }
 
     // Sự kiện khi click vào button back
@@ -104,7 +109,7 @@ public class TongQuatGhiChu extends AppCompatActivity {
         InitAndAddArrayList ();
 
         // Khởi tạo adapter ghi chú
-        adapterGhiChu = new AdapterGhiChu(null,this, arrayListGhiChu);
+        adapterGhiChu = new AdapterGhiChu(null, null,this, arrayListGhiChu);
 
         // Khởi tạo LinearLayoutManager
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -168,8 +173,17 @@ public class TongQuatGhiChu extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int which) {
                         try {
+
+                            // Insert ghi chú xóa vào bảng CongViecDaXoa
+                            InsertGhiChuDaXoa(id);
+
+                            // Delete ghi chú
                             db.KhongTraVe("DELETE FROM CongViec WHERE id = '"+ id +"'");
+
+                            // Off dialog
                             dialogInterface.dismiss();
+
+                            // Thông báo
                             Toast.makeText(TongQuatGhiChu.this, "Xóa thành công", Toast.LENGTH_SHORT).show();
 
                             // cập nhật lại dữ liệu sau khi xóa
@@ -180,7 +194,6 @@ public class TongQuatGhiChu extends AppCompatActivity {
 
                             // Đếm lại ghi chú
                             DemGhiChu ();
-
                         } catch (Exception e) {
                             Toast.makeText(TongQuatGhiChu.this, "Xóa thất bại", Toast.LENGTH_SHORT).show();
                         }
@@ -196,5 +209,24 @@ public class TongQuatGhiChu extends AppCompatActivity {
 
         // Show Dialog
         mDialog.show();
+    }
+
+    // Insert ghi chú xóa vào bảng CongViecDaXoa
+    public void InsertGhiChuDaXoa(int id) {
+        Cursor cursor = db.TraVe("SELECT * FROM CongViec WHERE id = '"+ id +"'");
+        while (cursor.moveToNext()) {
+            String ghiChu = cursor.getString(1);
+            String gioPhut = cursor.getString(2);
+
+            db.KhongTraVe("INSERT INTO CongViecDaXoa VALUES (null,'"+ ghiChu +"', '"+ gioPhut +"')");
+        }
+    }
+
+    // Animation
+    public void Animation () {
+        YoYo.with(Techniques.Pulse)
+                .duration(500)
+                .repeat(0)
+                .playOn(findViewById(R.id.layout_main));
     }
 }

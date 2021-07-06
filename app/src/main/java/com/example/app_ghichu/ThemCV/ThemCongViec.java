@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.app_ghichu.Database.DBGhiChu;
 import com.example.app_ghichu.MainActivity;
 import com.example.app_ghichu.R;
@@ -33,6 +35,9 @@ public class ThemCongViec extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_them_cong_viec);
+
+        // Animation
+        Animation();
 
         initUI ();
 
@@ -95,9 +100,12 @@ public class ThemCongViec extends AppCompatActivity {
                     // Lấy giờ hiện tại
                     String gio = String.valueOf(Calendar.getInstance().get(Calendar.HOUR_OF_DAY));
                     String phut = String.valueOf(Calendar.getInstance().get(Calendar.MINUTE));
-                    String gioPhut = gio + ":" + phut;
+                    String ngay = String.valueOf(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
+                    String thang = String.valueOf(Calendar.getInstance().get(Calendar.MONTH + 1));
+
+                    String gioPhut = gio + ":" + phut + "" + " (" + ngay + "/" + thang + ")";
                     if (Integer.parseInt(phut) < 10) {
-                        gioPhut = gio + ":0" + phut;
+                        gioPhut = gio + ":0" + phut + "" + " (" + ngay + "/" + thang + ")";
                     }
                     System.out.println(tenCongViec + gioPhut);
 
@@ -149,8 +157,17 @@ public class ThemCongViec extends AppCompatActivity {
                     case "Thư mục":
                         Intent intentMain = new Intent(ThemCongViec.this, MainActivity.class);
                         startActivity(intentMain);
+                        break;
                 }
             }
         });
+    }
+
+    // Animation
+    public void Animation () {
+        YoYo.with(Techniques.Pulse)
+                .duration(500)
+                .repeat(0)
+                .playOn(findViewById(R.id.layout_main));
     }
 }

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/layout_main"
     tools:context=".ThemCV.ThemCongViec"
     android:background="@color/background">
 
@@ -24,7 +23,7 @@
                 android:src="@drawable/ic_back"/>
 
             <TextView
-                android:transitionName="example_transition"
+                android:text="@string/tv_ghichu"
                 android:id="@+id/tv_ten_tieu_de"
                 android:layout_marginLeft="20sp"
                 android:layout_width="wrap_content"
@@ -35,7 +34,7 @@
         </FrameLayout>
 
         <TextView
-            android:id="@+id/tv_luu_cong_viec"
+            android:id="@+id/tv_luu_ghichu"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="@string/tv_xong"
@@ -57,7 +56,7 @@
             android:lines="100"
             android:gravity="left|top"
             android:textColorHighlight="@color/icon"
-            android:id="@+id/edt_them_CV"
+            android:id="@+id/edt_search_ghichu"
             android:textCursorDrawable="@drawable/color_cursor"
             android:layout_marginRight="20sp"
             android:layout_marginLeft="20sp"

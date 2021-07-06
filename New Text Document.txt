@@ -1,0 +1,31 @@
+I. App ghi chú
+
+==============================================================================
+
+	1. Chức năng tổng quát bao nhiêu ghi chú <OK>
+		+ Chức năng tìm kiếm ghi chú
+			+ Sửa ghi chú <xong>
+			+ màn hình tìm kiếm (db) <OK>
+			+ Xóa Ghi chú <OK>
+		+ Chức năng load ra toàn bộ ghi chú <db> <OK>
+			+ Sửa ghi chú <OK>
+				+ Activity Sửa ghi chú <OK>
+					+ Quay lại danh sách ghi chú <OK>
+					+ Sửa ghi chú <OK>
+					+ Lưu ghi chú <OK>
+			+ Xóa ghi chú <OK>
+		+ Chức năng thêm công việc <OK>
+			+ Chức năng quay lại <OK>
+			+ Chức năng lưu công việc <db> <OK>
+		+ Chức năng quay lại <OK>
+
+	2. Chức năng tổng quát bao nhiêu ghi chú đã xóa Delete <OK>
+		+ Chức năng tìm kiếm các ghi chú đã xóa <OK>
+		+ Chức năng load ghi chú đã xóa <OK>
+		+ Khôi phục ghi chú <OK>
+		+ Chức năng quay lại <OK>
+
+	3. Chức năng thêm công việc <OK>
+		+ Chức năng thêm công việc <OK>
+		+ Chức năng quay lại <OK>
+		+ Chức năng lưu công việc khi người dùng thêm <OK>
